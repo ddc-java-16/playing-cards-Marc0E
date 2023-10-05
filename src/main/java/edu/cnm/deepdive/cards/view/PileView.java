@@ -9,9 +9,7 @@ import java.util.List;
 
 public class PileView {
 
-  public static final Comparator<Card> COLOR_SUIT_RANK_COMPARATOR = new Comparator<Card>() {
-    @Override
-    public int compare(Card card1, Card card2) { //Comparator is abstract that's why we are overriding it.
+  public static final Comparator<Card> COLOR_SUIT_RANK_COMPARATOR = (Card card1, Card card2) -> { //The original code Im refering below is in notes
 
       Suit suit1 = card1.getSuit();
       Suit suit2 = card2.getSuit();
@@ -23,7 +21,6 @@ public class PileView {
         }
       }
       return comparison;
-    }
   };
   public String render(List<Card> cards, Color color){
     List<Card> sortedCards = new ArrayList<>(cards);
@@ -39,7 +36,7 @@ public class PileView {
     return String.format("%1$s pile: %2$s; %1$s count = %3$d", color, sortedCards, colorCount);
   }
 
-//  private static class ColorCardSorter implements Comparator<Card> { We moved all this to Comparator in line 11.
+//  private static class ColorCardSorter implements Comparator<Card> { We moved all this to Comparator in line 12.
 //
 //    @Override
 //    public int compare(Card card1, Card card2) { //Comparator is abstract that's why we are overriding it.
