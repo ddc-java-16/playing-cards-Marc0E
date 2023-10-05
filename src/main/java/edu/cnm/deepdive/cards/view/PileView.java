@@ -9,19 +9,10 @@ import java.util.List;
 
 public class PileView {
 
-  public static final Comparator<Card> COLOR_SUIT_RANK_COMPARATOR = (Card card1, Card card2) -> { //The original code Im refering below is in notes
+  public static final Comparator<Card> COLOR_SUIT_RANK_COMPARATOR =  //The original code Im referring below is in notes
+    Comparator.comparing((Card card) -> card.getSuit().getColor()).thenComparing((card) -> card.getSuit())
+        .thenComparing((card) -> card.getRank()); // this could be thenComparing(Card::getRank) is called composition of method reference lambda
 
-      Suit suit1 = card1.getSuit();
-      Suit suit2 = card2.getSuit();
-      int comparison = suit1.getColor().compareTo(suit2.getColor());
-      if (comparison == 0){
-        comparison = suit1.compareTo(suit2);
-        if (comparison == 0){
-          comparison = card1.getRank().compareTo(card2.getRank());
-        }
-      }
-      return comparison;
-  };
   public String render(List<Card> cards, Color color){
     List<Card> sortedCards = new ArrayList<>(cards);
     //Comparator<Card> comparator = new ColorCardSorter(); This is part of what we moved to Comparator.
